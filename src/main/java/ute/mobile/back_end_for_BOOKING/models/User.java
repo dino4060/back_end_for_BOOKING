@@ -47,6 +47,8 @@ public class User extends BaseEntity {
 
     String password;
 
+    String avatarUrl;
+
     Integer provinceId;
 
     Integer wardId;

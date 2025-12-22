@@ -4,19 +4,17 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RoomData {
+  @JsonProperty("_id")
+  Long _id;
   Long id;
   Instant createdAt;
   Instant updatedAt;
@@ -44,4 +42,9 @@ public class RoomData {
   List<String> thumbnailUrls;
   List<String> bookedDate;
   List<String> amenities;
+
+  public void setId(Long id) {
+    this.id = id;
+    this._id = id;
+  }
 }

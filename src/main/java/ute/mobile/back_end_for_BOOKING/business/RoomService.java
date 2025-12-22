@@ -13,6 +13,7 @@ import ute.mobile.back_end_for_BOOKING.business.dto.RoomParam;
 import ute.mobile.back_end_for_BOOKING.business.mappers.RoomMapper;
 import ute.mobile.back_end_for_BOOKING.business.specification.RoomSpec;
 import ute.mobile.back_end_for_BOOKING.common.application.PageData;
+import ute.mobile.back_end_for_BOOKING.common.exception.NotFoundE;
 import ute.mobile.back_end_for_BOOKING.models.Room;
 import ute.mobile.back_end_for_BOOKING.models.repositories.RoomRepo;
 
@@ -41,5 +42,12 @@ public class RoomService {
 
     return list.stream()
         .map(room -> this.mapper.toData(room)).toList();
+  }
+
+  public RoomData getById(Long id) {
+    var room = this.repo.findById(id)
+        .orElseThrow(() -> new NotFoundE("Room not found with id: " + id));
+
+    return this.mapper.toData(room);
   }
 }
