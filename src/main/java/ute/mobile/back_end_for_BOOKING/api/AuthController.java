@@ -1,4 +1,4 @@
-package ute.mobile.back_end_for_BOOKING.ui;
+package ute.mobile.back_end_for_BOOKING.api;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
 import ute.mobile.back_end_for_BOOKING.business.AuthService;
 import ute.mobile.back_end_for_BOOKING.business.dto.LoginPhoneBody;
 import ute.mobile.back_end_for_BOOKING.business.dto.RegisterBody;
-import ute.mobile.back_end_for_BOOKING.ui.dto.AuthRes;
 
 // PublicAuthController //
 @RestController

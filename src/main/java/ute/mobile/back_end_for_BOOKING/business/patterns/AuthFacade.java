@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
 import ute.mobile.back_end_for_BOOKING.business.TokenService;
 import ute.mobile.back_end_for_BOOKING.business.mappers.UserMapper;
 import ute.mobile.back_end_for_BOOKING.common.exception.NoRightsE;
@@ -16,7 +17,6 @@ import ute.mobile.back_end_for_BOOKING.models.Token;
 import ute.mobile.back_end_for_BOOKING.models.User;
 import ute.mobile.back_end_for_BOOKING.models.dto.Role;
 import ute.mobile.back_end_for_BOOKING.models.repositories.UserRepo;
-import ute.mobile.back_end_for_BOOKING.ui.dto.AuthRes;
 
 @Service
 @RequiredArgsConstructor

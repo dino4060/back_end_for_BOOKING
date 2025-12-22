@@ -1,4 +1,4 @@
-package ute.mobile.back_end_for_BOOKING.ui;
+package ute.mobile.back_end_for_BOOKING.api;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import ute.mobile.back_end_for_BOOKING.api.dto.RoomData;
 import ute.mobile.back_end_for_BOOKING.business.RoomService;
 import ute.mobile.back_end_for_BOOKING.business.dto.RoomParam;
-import ute.mobile.back_end_for_BOOKING.ui.dto.RoomData;
 
 @RestController
 @RequestMapping("/api/public/rooms")

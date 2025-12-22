@@ -2,9 +2,9 @@ package ute.mobile.back_end_for_BOOKING.business.patterns;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
 import ute.mobile.back_end_for_BOOKING.models.User;
 import ute.mobile.back_end_for_BOOKING.models.dto.Role;
-import ute.mobile.back_end_for_BOOKING.ui.dto.AuthRes;
 
 import org.springframework.http.HttpHeaders;
 

@@ -1,4 +1,4 @@
-package ute.mobile.back_end_for_BOOKING.ui.dto;
+package ute.mobile.back_end_for_BOOKING.api.dto;
 
 import java.time.Instant;
 import java.util.Set;
