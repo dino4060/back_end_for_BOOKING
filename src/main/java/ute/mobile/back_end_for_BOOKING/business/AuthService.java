@@ -60,7 +60,7 @@ public class AuthService extends AuthTemplateImpl {
     return this.authFacade.inAuth(user, headers);
   }
 
-  public void createExampleUser(String name, String phone, String password, String avatarUrl, Set<String> roles) {
+  public void createExampleUser(String name, String phone, String email, String password, String avatarUrl, Set<String> roles) {
     var existingUser = this.userRepo.findByPhone(phone);
 
     if (existingUser.isPresent()) {

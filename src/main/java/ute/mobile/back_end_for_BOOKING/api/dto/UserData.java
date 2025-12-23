@@ -3,19 +3,32 @@ package ute.mobile.back_end_for_BOOKING.api.dto;
 import java.time.Instant;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.experimental.FieldDefaults;
 import ute.mobile.back_end_for_BOOKING.models.dto.Role;
 
-public record UserData(
-                Long id,
-                String name,
-                String username,
-                String email,
-                String phone,
-                String status,
-                Set<Role> roles,
-                Integer provinceId,
-                Integer wardId,
-                String street,
-                Instant createdAt,
-                Instant updatedAt) {
+@Data
+@FieldDefaults(level = AccessLevel.PRIVATE)
+public class UserData {
+  @JsonProperty("_id")
+  Long _id;
+  Long id;
+  String name;
+  String username;
+  String email;
+  String phone;
+  String avatarUrl;
+  Set<Role> roles;
+  Instant createdAt;
+  Instant updatedAt;
+  Boolean isLogin;
+
+  public void setId(Long id) {
+    this.id = id;
+    this._id = id;
+    this.isLogin = true;
+  }
 }

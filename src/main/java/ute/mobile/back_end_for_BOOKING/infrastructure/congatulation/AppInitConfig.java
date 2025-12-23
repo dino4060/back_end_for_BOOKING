@@ -24,6 +24,7 @@ public class AppInitConfig {
       authService.createExampleUser(
           "Ngọc Quyên",
           "0384445551",
+          "quyen1@gmail.com",
           "123456",
           "",
           Set.of(Role.HOST.name()));
@@ -31,6 +32,7 @@ public class AppInitConfig {
       authService.createExampleUser(
           "Trinh",
           "0384445552",
+          "trinh1@gmail.com",
           "123456",
           "",
           Set.of(Role.HOST.name()));
@@ -39,6 +41,7 @@ public class AppInitConfig {
       authService.createExampleUser(
           "Xuân Thắng",
           "0385554441",
+          "thang1@gmail.com",
           "123456",
           "",
           Set.of(Role.CUSTOMER.name()));
@@ -46,6 +49,7 @@ public class AppInitConfig {
       authService.createExampleUser(
           "Đình Lân",
           "0385554442",
+          "lan1@gmail.com",
           "123456",
           "",
           Set.of(Role.CUSTOMER.name()));
