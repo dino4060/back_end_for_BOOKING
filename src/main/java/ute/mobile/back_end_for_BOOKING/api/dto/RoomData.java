@@ -40,7 +40,7 @@ public class RoomData {
   BigDecimal weeklyPrice;
   Float reviewStars;
   List<String> thumbnailUrls;
-  List<String> bookedDate;
+  List<String> bookedDates;
   List<String> amenities;
 
   public void setId(Long id) {
