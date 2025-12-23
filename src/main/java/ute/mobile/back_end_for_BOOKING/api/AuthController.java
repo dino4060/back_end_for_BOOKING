@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
-import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
 import ute.mobile.back_end_for_BOOKING.business.AuthService;
+import ute.mobile.back_end_for_BOOKING.business.dto.LoginData;
 import ute.mobile.back_end_for_BOOKING.business.dto.LoginEmailBody;
 import ute.mobile.back_end_for_BOOKING.business.dto.LoginPhoneBody;
-import ute.mobile.back_end_for_BOOKING.business.dto.RegisterBody;
+import ute.mobile.back_end_for_BOOKING.business.dto.LoginRegisterBody;
 
 // PublicAuthController //
 @RestController
@@ -26,28 +26,28 @@ public class AuthController {
 
   // register //
   @PostMapping("/register")
-  public ResponseEntity<AuthRes> register(
-      @RequestBody RegisterBody body) {
+  public ResponseEntity<LoginData> register(
+      @RequestBody LoginRegisterBody body) {
     HttpHeaders headers = new HttpHeaders();
-    AuthRes auth = this.authService.registerCustomer(body, headers);
+    LoginData auth = this.authService.registerCustomer(body, headers);
     return ResponseEntity.ok().headers(headers).body(auth);
   }
 
   // login with phone //
   @PostMapping("/login/phone")
-  public ResponseEntity<AuthRes> login(
+  public ResponseEntity<LoginData> login(
       @RequestBody LoginPhoneBody body) {
     HttpHeaders headers = new HttpHeaders();
-    AuthRes result = this.authService.login(body, headers);
+    LoginData result = this.authService.login(body, headers);
 
     return ResponseEntity.ok().headers(headers).body(result);
   }
 
   @PostMapping("/login/email")
-  public ResponseEntity<AuthRes> login(
+  public ResponseEntity<LoginData> login(
       @RequestBody LoginEmailBody body) {
     HttpHeaders headers = new HttpHeaders();
-    AuthRes result = this.authService.login(body, headers);
+    LoginData result = this.authService.login(body, headers);
 
     return ResponseEntity.ok().headers(headers).body(result);
   }

@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ute.mobile.back_end_for_BOOKING.api.dto.UserData;
 import ute.mobile.back_end_for_BOOKING.business.dto.UserBody;
+import ute.mobile.back_end_for_BOOKING.business.dto.UserData;
 import ute.mobile.back_end_for_BOOKING.business.dto.UserParam;
 import ute.mobile.back_end_for_BOOKING.business.mappers.UserMapper;
 import ute.mobile.back_end_for_BOOKING.business.specification.UserSpec;

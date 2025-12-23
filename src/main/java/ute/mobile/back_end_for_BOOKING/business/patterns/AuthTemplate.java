@@ -2,8 +2,8 @@ package ute.mobile.back_end_for_BOOKING.business.patterns;
 
 import org.springframework.http.HttpHeaders;
 
-import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
+import ute.mobile.back_end_for_BOOKING.business.dto.LoginData;
 
 public interface AuthTemplate {
-    AuthRes login(LoginStrategy body, HttpHeaders headers);
+    LoginData login(LoginStrategy body, HttpHeaders headers);
 }

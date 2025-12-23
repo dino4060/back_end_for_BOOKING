@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
 import ute.mobile.back_end_for_BOOKING.business.TokenService;
+import ute.mobile.back_end_for_BOOKING.business.dto.LoginData;
 import ute.mobile.back_end_for_BOOKING.business.mappers.UserMapper;
 import ute.mobile.back_end_for_BOOKING.common.exception.NoRightsE;
 import ute.mobile.back_end_for_BOOKING.common.exception.UnAuthE;
@@ -64,7 +64,7 @@ public class AuthFacade {
     }
 
     // inAuth //
-    public AuthRes inAuth(User user, HttpHeaders headers) {
+    public LoginData inAuth(User user, HttpHeaders headers) {
         // get tokens
         TokenPair tokenPair = this.securityProvider.genTokenPair(user);
 
@@ -76,7 +76,7 @@ public class AuthFacade {
         this.cookieProvider.attachRefreshToken(
                 headers, tokenPair.refreshToken(), tokenPair.refreshTokenTtl());
 
-        var authData = new AuthRes();
+        var authData = new LoginData();
         authData.setIsAuthenticated(true);
         authData.setAccessToken(tokenPair.accessToken());
         authData.setCurrentUser(this.userMapper.toData(user));
@@ -84,23 +84,23 @@ public class AuthFacade {
     }
 
     // unAuth //
-    public AuthRes unAuth(HttpHeaders headers) {
+    public LoginData unAuth(HttpHeaders headers) {
         this.cookieProvider.clearRefreshToken(headers);
 
-        var authData = new AuthRes();
+        var authData = new LoginData();
         authData.setIsAuthenticated(false);
         return authData;
     }
 
     // outAuth //
-    public AuthRes outAuth(Token token, HttpHeaders headers) {
+    public LoginData outAuth(Token token, HttpHeaders headers) {
         // 1. clean refresh token from DB
         this.tokenService.cleanRefreshToken(token);
 
         // 2. clean refresh token from cookies
         this.cookieProvider.clearRefreshToken(headers);
 
-        var authData = new AuthRes();
+        var authData = new LoginData();
         authData.setIsAuthenticated(true);
         return authData;
     }

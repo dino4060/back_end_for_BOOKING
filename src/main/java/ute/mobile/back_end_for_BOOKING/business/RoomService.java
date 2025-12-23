@@ -8,7 +8,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import ute.mobile.back_end_for_BOOKING.api.dto.RoomData;
+import ute.mobile.back_end_for_BOOKING.business.dto.RoomData;
 import ute.mobile.back_end_for_BOOKING.business.dto.RoomParam;
 import ute.mobile.back_end_for_BOOKING.business.mappers.RoomMapper;
 import ute.mobile.back_end_for_BOOKING.business.specification.RoomSpec;

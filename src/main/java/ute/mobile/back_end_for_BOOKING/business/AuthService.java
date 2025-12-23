@@ -6,8 +6,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import ute.mobile.back_end_for_BOOKING.api.dto.AuthRes;
-import ute.mobile.back_end_for_BOOKING.business.dto.RegisterBody;
+import ute.mobile.back_end_for_BOOKING.business.dto.LoginData;
+import ute.mobile.back_end_for_BOOKING.business.dto.LoginRegisterBody;
 import ute.mobile.back_end_for_BOOKING.business.patterns.AuthFacade;
 import ute.mobile.back_end_for_BOOKING.business.patterns.AuthTemplateImpl;
 import ute.mobile.back_end_for_BOOKING.infrastructure.SecurityProvider;
@@ -49,7 +49,7 @@ public class AuthService extends AuthTemplateImpl {
     return Role.CUSTOMER;
   }
 
-  public AuthRes registerCustomer(RegisterBody body, HttpHeaders headers) {
+  public LoginData registerCustomer(LoginRegisterBody body, HttpHeaders headers) {
     this.userService.checkEmailNotExists(body.email());
     this.userService.checkPhoneNotExists(body.phone());
 
