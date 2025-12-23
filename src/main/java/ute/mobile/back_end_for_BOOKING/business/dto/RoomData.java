@@ -2,6 +2,7 @@ package ute.mobile.back_end_for_BOOKING.business.dto;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -39,9 +40,9 @@ public class RoomData {
   BigDecimal price;
   BigDecimal weeklyPrice;
   Float reviewStars;
-  List<String> thumbnailUrls;
-  List<String> bookedDates;
   List<String> amenities;
+  List<String> thumbnailUrls;
+  List<LocalDate> bookedDates;
 
   public void setId(Long id) {
     this.id = id;

@@ -25,7 +25,7 @@ import ute.mobile.back_end_for_BOOKING.models.dto.Role;
 @Table(name = "users")
 @DynamicInsert
 @DynamicUpdate
-@SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE user_id=?")
+@SQLDelete(sql = "UPDATE users SET is_deleted = true WHERE _id=?")
 @SQLRestriction("is_deleted = false")
 @Getter
 @Setter
@@ -34,83 +34,83 @@ import ute.mobile.back_end_for_BOOKING.models.dto.Role;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class User extends BaseEntity {
 
-    String name;
+  String name;
 
-    @Column(nullable = false, unique = true)
-    String username;
+  @Column(nullable = false, unique = true)
+  String username;
 
-    @Column(unique = true)
-    String email;
+  @Column(unique = true)
+  String email;
 
-    @Column(unique = true)
-    String phone;
+  @Column(unique = true)
+  String phone;
 
-    String password;
+  String password;
 
-    String avatarUrl;
+  String avatarUrl;
 
-    Integer provinceId;
+  Integer provinceId;
 
-    Integer wardId;
+  Integer wardId;
 
-    String street;
+  String street;
 
-    Set<String> roles;
+  Set<String> roles;
 
-    // FACTORY //
+  // FACTORY //
 
-    public User(Long id) {
-        var user = new User();
-        user.setId(id);
-    }
+  public User(Long id) {
+    var user = new User();
+    user.setId(id);
+  }
 
-    public static User createCustomer(String name, String email, String phone, String passHashed) {
-        User user = new User();
+  public static User createCustomer(String name, String email, String phone, String passHashed) {
+    User user = new User();
 
-        user.setName(name);
-        user.setUsername("user" + System.currentTimeMillis());
-        user.setEmail(email);
-        user.setPhone(phone);
-        user.setPassword(passHashed);
-        user.addRole(Role.CUSTOMER);
+    user.setName(name);
+    user.setUsername("user" + System.currentTimeMillis());
+    user.setEmail(email);
+    user.setPhone(phone);
+    user.setPassword(passHashed);
+    user.addRole(Role.CUSTOMER);
 
-        return user;
-    }
+    return user;
+  }
 
-    public static User createThirdCustomer(String name, String email) {
-        User user = new User();
+  public static User createThirdCustomer(String name, String email) {
+    User user = new User();
 
-        user.setName(name);
-        user.setUsername("user" + System.currentTimeMillis());
-        user.setEmail(email);
-        user.addRole(Role.CUSTOMER);
+    user.setName(name);
+    user.setUsername("user" + System.currentTimeMillis());
+    user.setEmail(email);
+    user.addRole(Role.CUSTOMER);
 
-        return user;
-    }
+    return user;
+  }
 
-    public static User createAdmin(String username, String email, String passHashed) {
-        User user = new User();
+  public static User createAdmin(String username, String email, String passHashed) {
+    User user = new User();
 
-        user.setName("Top 1 BOOKING BAR");
-        user.setUsername(username);
-        user.setEmail(email);
-        user.setPassword(passHashed);
-        user.addRole(Role.ADMIN);
+    user.setName("Top 1 BOOKING BAR");
+    user.setUsername(username);
+    user.setEmail(email);
+    user.setPassword(passHashed);
+    user.addRole(Role.ADMIN);
 
-        return user;
-    }
+    return user;
+  }
 
-    // INSTANCE //
+  // INSTANCE //
 
-    public void updateCustomer(String name, String email, String phone) {
-        this.setName(name);
-        this.setEmail(email);
-        this.setPhone(phone);
-    }
+  public void updateCustomer(String name, String email, String phone) {
+    this.setName(name);
+    this.setEmail(email);
+    this.setPhone(phone);
+  }
 
-    public void addRole(Role role) {
-        if (this.getRoles() == null)
-            this.setRoles(new HashSet<>());
-        this.getRoles().add(role.name());
-    }
+  public void addRole(Role role) {
+    if (this.getRoles() == null)
+      this.setRoles(new HashSet<>());
+    this.getRoles().add(role.name());
+  }
 }

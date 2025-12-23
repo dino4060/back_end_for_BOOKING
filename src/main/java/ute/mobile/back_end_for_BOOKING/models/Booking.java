@@ -1,19 +1,19 @@
 package ute.mobile.back_end_for_BOOKING.models;
 
+import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,42 +24,35 @@ import lombok.experimental.FieldDefaults;
 import ute.mobile.back_end_for_BOOKING.common.domain.BaseEntity;
 
 @Entity
-@Table(name = "tokens")
+@Table(name = "bookings")
 @DynamicInsert
 @DynamicUpdate
-@SQLDelete(sql = "UPDATE tokens SET is_deleted = true WHERE _id=?")
+@SQLDelete(sql = "UPDATE bookings SET is_deleted = true WHERE _id=?")
 @SQLRestriction("is_deleted = false")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Token extends BaseEntity {
+public class Booking extends BaseEntity {
 
-    @Column(columnDefinition = "text")
-    String refreshToken;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "customer_id", nullable = false)
+  User customer;
 
-    Instant refreshTokenExpiry;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "room_id", nullable = false)
+  Room room;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false, updatable = false)
-    @JsonIgnore
-    User user;
+  @Column(nullable = false)
+  LocalDate startDate;
 
-    // FACTORY //
+  @Column(nullable = false)
+  LocalDate endDate;
 
-    public static Token createToken(User user) {
-        Token token = new Token();
+  @Column(nullable = false)
+  Instant bookingTime;
 
-        token.setUser(user);
-
-        return token;
-    }
-
-    // INSTANCE //
-
-    public void updateRefreshToken(String refreshToken, Instant refreshTokenExpiry) {
-        this.setRefreshToken(refreshToken);
-        this.setRefreshTokenExpiry(refreshTokenExpiry);
-    }
+  @Column(precision = 8, scale = 0, nullable = false)
+  BigDecimal total;
 }

@@ -16,6 +16,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -87,17 +88,20 @@ public class Room extends BaseEntity {
   Float reviewStars;
 
   @ElementCollection
+  @CollectionTable(name = "room_amenities", joinColumns = @JoinColumn(name = "room_id"))
+  @Column(name = "amenity")
+  List<String> amenities = new ArrayList<>();
+
+  @ElementCollection
   @CollectionTable(name = "room_thumbnail_urls", joinColumns = @JoinColumn(name = "room_id"))
   @Column(name = "thumbnail_url")
   List<String> thumbnailUrls = new ArrayList<>();
 
-  @ElementCollection
-  @CollectionTable(name = "room_booked_dates", joinColumns = @JoinColumn(name = "room_id"))
-  @Column(name = "booked_date")
-  List<String> bookedDates = new ArrayList<>();
-
-  @ElementCollection
-  @CollectionTable(name = "room_amenities", joinColumns = @JoinColumn(name = "room_id"))
-  @Column(name = "amenity")
-  List<String> amenities = new ArrayList<>();
+  @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
+  List<BookedDate> bookedDates = new ArrayList<>();
+  // @ElementCollection
+  // @CollectionTable(name = "room_booked_dates", joinColumns = @JoinColumn(name =
+  // "room_id"))
+  // @Column(name = "booked_date")
+  // List<String> bookedDates = new ArrayList<>();
 }
