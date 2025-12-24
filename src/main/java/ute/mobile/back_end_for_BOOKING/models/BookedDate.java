@@ -35,9 +35,13 @@ import ute.mobile.back_end_for_BOOKING.common.domain.BaseEntity;
 public class BookedDate extends BaseEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "room_id", nullable = false)
+  @JoinColumn(name = "room_id")
   Room room;
 
-  @Column(name = "booked_date", nullable = false)
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "booking_id")
+  Booking booking;
+
+  @Column(name = "booked_date")
   LocalDate date;
 }

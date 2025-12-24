@@ -3,6 +3,8 @@ package ute.mobile.back_end_for_BOOKING.models;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,6 +16,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -55,4 +58,7 @@ public class Booking extends BaseEntity {
 
   @Column(precision = 8, scale = 0, nullable = false)
   BigDecimal total;
+
+  @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
+  List<BookedDate> bookedDates = new ArrayList<>();
 }

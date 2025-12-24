@@ -33,10 +33,7 @@ public class BookingService {
   BookedDateRepo bookedDateRepo;
   BookingMapper mapper;
 
-  // @Transactional
   public BookingData create(CurrentUser currentUser, BookingBody body) {
-    log.info(">>> Creating booking for user: {}, room: {}", currentUser.id(), body.getRoomId());
-
     // Find room
     var room = this.roomRepo.findById(body.getRoomId())
         .orElseThrow(() -> new NotFoundE("Room not found with id: " + body.getRoomId()));
@@ -51,21 +48,20 @@ public class BookingService {
     booking.setTotal(body.getTotal());
 
     var savedBooking = this.bookingRepo.save(booking);
-    log.info(">>> Created booking with id: {}", savedBooking.getId());
 
     // Create booked dates
-    var bookedDatesList = this.generateBookedDates(body.getStartDate(), body.getEndDate());
-    var bookedDateEntities = new ArrayList<BookedDate>();
+    var bookedDateValues = this.generateBookedDates(body.getStartDate(), body.getEndDate());
+    var bookedDates = new ArrayList<BookedDate>();
 
-    for (var date : bookedDatesList) {
+    for (var date : bookedDateValues) {
       var bookedDate = new BookedDate();
       bookedDate.setRoom(room);
+      bookedDate.setBooking(savedBooking);
       bookedDate.setDate(date);
-      bookedDateEntities.add(bookedDate);
+      bookedDates.add(bookedDate);
     }
 
-    this.bookedDateRepo.saveAll(bookedDateEntities);
-    log.info(">>> Created {} booked dates for room: {}", bookedDateEntities.size(), room.getId());
+    this.bookedDateRepo.saveAll(bookedDates);
 
     return this.mapper.toData(savedBooking);
   }

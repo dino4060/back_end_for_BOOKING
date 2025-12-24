@@ -97,11 +97,6 @@ public class Room extends BaseEntity {
   @Column(name = "thumbnail_url")
   List<String> thumbnailUrls = new ArrayList<>();
 
-  @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
   List<BookedDate> bookedDates = new ArrayList<>();
-  // @ElementCollection
-  // @CollectionTable(name = "room_booked_dates", joinColumns = @JoinColumn(name =
-  // "room_id"))
-  // @Column(name = "booked_date")
-  // List<String> bookedDates = new ArrayList<>();
 }
