@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -61,7 +62,7 @@ public class Booking extends BaseEntity implements BaseStatus<BookingStatus> {
   @Column(precision = 8, scale = 0, nullable = false)
   BigDecimal total;
 
-  @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
   List<BookedDate> bookedDates = new ArrayList<>();
 
   String status;

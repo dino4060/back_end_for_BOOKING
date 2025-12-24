@@ -35,6 +35,9 @@ public class TripService {
 
     if (body.getStatus() != null) {
       booking.setStatus(body.getStatus());
+      if (booking.hasStatus(BookingStatus.CANCELED)) {
+        booking.getBookedDates().clear();
+      }
       this.bookingRepo.save(booking);
     }
 
