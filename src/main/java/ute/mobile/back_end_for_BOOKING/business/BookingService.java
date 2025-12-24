@@ -18,6 +18,7 @@ import ute.mobile.back_end_for_BOOKING.common.api.CurrentUser;
 import ute.mobile.back_end_for_BOOKING.common.exception.NotFoundE;
 import ute.mobile.back_end_for_BOOKING.models.BookedDate;
 import ute.mobile.back_end_for_BOOKING.models.Booking;
+import ute.mobile.back_end_for_BOOKING.models.dto.BookingStatus;
 import ute.mobile.back_end_for_BOOKING.models.repositories.BookedDateRepo;
 import ute.mobile.back_end_for_BOOKING.models.repositories.BookingRepo;
 import ute.mobile.back_end_for_BOOKING.models.repositories.RoomRepo;
@@ -46,6 +47,7 @@ public class BookingService {
     booking.setEndDate(body.getEndDate());
     booking.setBookingTime(Instant.now());
     booking.setTotal(body.getTotal());
+    booking.setStatus(BookingStatus.UPCOMING);
 
     var savedBooking = this.bookingRepo.save(booking);
 

@@ -13,7 +13,7 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class BookingData {
+public class TripData {
   @JsonProperty("_id")
   Long _id;
   Long id;

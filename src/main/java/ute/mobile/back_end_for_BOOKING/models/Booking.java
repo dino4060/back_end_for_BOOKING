@@ -25,6 +25,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import ute.mobile.back_end_for_BOOKING.common.domain.BaseEntity;
+import ute.mobile.back_end_for_BOOKING.common.domain.BaseStatus;
+import ute.mobile.back_end_for_BOOKING.models.dto.BookingStatus;
 
 @Entity
 @Table(name = "bookings")
@@ -37,7 +39,7 @@ import ute.mobile.back_end_for_BOOKING.common.domain.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Booking extends BaseEntity {
+public class Booking extends BaseEntity implements BaseStatus<BookingStatus> {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "customer_id", nullable = false)
@@ -61,4 +63,6 @@ public class Booking extends BaseEntity {
 
   @OneToMany(mappedBy = "booking", fetch = FetchType.LAZY)
   List<BookedDate> bookedDates = new ArrayList<>();
+
+  String status;
 }
