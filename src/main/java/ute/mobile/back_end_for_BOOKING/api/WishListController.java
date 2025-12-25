@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AccessLevel;
@@ -45,12 +46,24 @@ public class WishListController {
     return ResponseEntity.ok(Map.of());
   }
 
-  @GetMapping
-  public ResponseEntity<?> paginate(
+  @GetMapping("/rooms/{roomId}")
+  public ResponseEntity<?> hasLike(
       @AuthUser CurrentUser currentUser,
-      @ModelAttribute WishListParam param) {
+      @PathVariable Long roomId) {
 
-    var result = this.wishListService.paginate(currentUser, param);
+    var result = this.wishListService.hasLike(currentUser, roomId);
+    return ResponseEntity.ok(result);
+  }
+
+  @GetMapping("/rooms")
+  public ResponseEntity<?> paginateOrList(
+      @AuthUser CurrentUser currentUser,
+      @ModelAttribute WishListParam param,
+      @RequestParam(name = "non-page", defaultValue = "false") boolean nonPage) {
+
+    var result = nonPage
+        ? this.wishListService.list(currentUser, param)
+        : this.wishListService.paginate(currentUser, param);
     return ResponseEntity.ok(result);
   }
 }

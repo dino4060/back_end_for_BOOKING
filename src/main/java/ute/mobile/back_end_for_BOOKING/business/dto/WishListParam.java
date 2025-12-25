@@ -10,4 +10,5 @@ import ute.mobile.back_end_for_BOOKING.common.application.PageParam;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WishListParam extends PageParam {
+  String destination;
 }

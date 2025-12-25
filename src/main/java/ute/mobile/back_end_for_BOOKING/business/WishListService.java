@@ -1,5 +1,7 @@
 package ute.mobile.back_end_for_BOOKING.business;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import lombok.AccessLevel;
@@ -66,6 +68,17 @@ public class WishListService {
     this.wishListRepo.save(wishList);
   }
 
+  public boolean hasLike(CurrentUser currentUser, Long roomId) {
+    var wishList = this.getOrCreateWishList(currentUser);
+
+    var isLikedRoom = this.likedRoomRepo
+        .findByWishListIdAndRoomId(wishList.getId(), roomId)
+        .map((non) -> true)
+        .orElseGet(() -> false);
+
+    return isLikedRoom;
+  }
+
   public PageData<LikedRoomData> paginate(CurrentUser currentUser, WishListParam param) {
     var wishList = this.getOrCreateWishList(currentUser);
 
@@ -76,6 +89,16 @@ public class WishListService {
     return WishListSpec.toPageData(
         page,
         (LikedRoom likedRoom) -> this.likedRoomMapper.toData(likedRoom));
+  }
+
+  public List<LikedRoomData> list(CurrentUser currentUser, WishListParam param) {
+    var wishList = this.getOrCreateWishList(currentUser);
+
+    var list = this.likedRoomRepo.findAll(
+        WishListSpec.toQueryable(param, wishList.getId()));
+
+    return list.stream()
+        .map((likedRoom) -> this.likedRoomMapper.toData(likedRoom)).toList();
   }
 
   private WishList getOrCreateWishList(CurrentUser currentUser) {

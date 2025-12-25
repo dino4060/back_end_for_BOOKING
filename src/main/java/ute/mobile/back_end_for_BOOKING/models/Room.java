@@ -99,4 +99,7 @@ public class Room extends BaseEntity {
 
   @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
   List<BookedDate> bookedDates = new ArrayList<>();
+
+  @OneToMany(mappedBy = "room", fetch = FetchType.LAZY)
+  List<LikedRoom> likedRooms = new ArrayList<>();
 }
