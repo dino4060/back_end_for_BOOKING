@@ -59,7 +59,7 @@ public class Room extends BaseEntity {
 
   String country;
 
-  String smartLocation;
+  String destination;
 
   @Column(precision = 18, scale = 15)
   BigDecimal latitude;

@@ -9,6 +9,6 @@ import ute.mobile.back_end_for_BOOKING.common.application.PageParam;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class WishListParam extends PageParam {
+public class LikedRoomParam extends PageParam {
   String destination;
 }

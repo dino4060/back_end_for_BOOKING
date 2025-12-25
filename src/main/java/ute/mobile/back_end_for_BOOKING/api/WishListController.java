@@ -16,7 +16,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import ute.mobile.back_end_for_BOOKING.business.WishListService;
-import ute.mobile.back_end_for_BOOKING.business.dto.WishListParam;
+import ute.mobile.back_end_for_BOOKING.business.dto.LikedRoomParam;
 import ute.mobile.back_end_for_BOOKING.common.api.AuthUser;
 import ute.mobile.back_end_for_BOOKING.common.api.CurrentUser;
 
@@ -58,7 +58,7 @@ public class WishListController {
   @GetMapping("/rooms")
   public ResponseEntity<?> paginateOrList(
       @AuthUser CurrentUser currentUser,
-      @ModelAttribute WishListParam param,
+      @ModelAttribute LikedRoomParam param,
       @RequestParam(name = "non-page", defaultValue = "false") boolean nonPage) {
 
     var result = nonPage

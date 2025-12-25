@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import ute.mobile.back_end_for_BOOKING.business.dto.LikedRoomData;
-import ute.mobile.back_end_for_BOOKING.business.dto.WishListParam;
+import ute.mobile.back_end_for_BOOKING.business.dto.LikedRoomParam;
 import ute.mobile.back_end_for_BOOKING.business.mappers.LikedRoomMapper;
-import ute.mobile.back_end_for_BOOKING.business.specification.WishListSpec;
+import ute.mobile.back_end_for_BOOKING.business.specification.LikedRoomSpec;
 import ute.mobile.back_end_for_BOOKING.common.api.CurrentUser;
 import ute.mobile.back_end_for_BOOKING.common.application.PageData;
 import ute.mobile.back_end_for_BOOKING.common.exception.NotFoundE;
@@ -79,23 +79,23 @@ public class WishListService {
     return isLikedRoom;
   }
 
-  public PageData<LikedRoomData> paginate(CurrentUser currentUser, WishListParam param) {
+  public PageData<LikedRoomData> paginate(CurrentUser currentUser, LikedRoomParam param) {
     var wishList = this.getOrCreateWishList(currentUser);
 
     var page = this.likedRoomRepo.findAll(
-        WishListSpec.toQueryable(param, wishList.getId()),
-        WishListSpec.toPageable(param));
+        LikedRoomSpec.toQueryable(param, wishList.getId()),
+        LikedRoomSpec.toPageable(param));
 
-    return WishListSpec.toPageData(
+    return LikedRoomSpec.toPageData(
         page,
         (LikedRoom likedRoom) -> this.likedRoomMapper.toData(likedRoom));
   }
 
-  public List<LikedRoomData> list(CurrentUser currentUser, WishListParam param) {
+  public List<LikedRoomData> list(CurrentUser currentUser, LikedRoomParam param) {
     var wishList = this.getOrCreateWishList(currentUser);
 
     var list = this.likedRoomRepo.findAll(
-        WishListSpec.toQueryable(param, wishList.getId()));
+        LikedRoomSpec.toQueryable(param, wishList.getId()));
 
     return list.stream()
         .map((likedRoom) -> this.likedRoomMapper.toData(likedRoom)).toList();

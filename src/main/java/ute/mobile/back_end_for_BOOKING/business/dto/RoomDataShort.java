@@ -27,7 +27,7 @@ public class RoomDataShort {
   UserData host;
   String street;
   String country;
-  String smartLocation;
+  String destination;
   BigDecimal latitude;
   BigDecimal longitude;
   String roomType;
