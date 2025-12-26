@@ -27,7 +27,7 @@ public class RoomController {
   public List<RoomData> list(
       @ModelAttribute RoomParam param) {
 
-    System.out.println(">>> 11 " + param);
+    System.out.println(">>> 102 " + param);
     return this.roomService.list(param);
   }
 

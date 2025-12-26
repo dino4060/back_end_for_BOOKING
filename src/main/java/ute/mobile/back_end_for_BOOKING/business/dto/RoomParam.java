@@ -20,4 +20,16 @@ public class RoomParam extends PageParam {
   @BindParam("max-price")
   Integer maxPrice;
 
+  Integer bedrooms;
+
+  Integer beds;
+
+  @BindParam("is-couple-bed")
+  Boolean isCoupleBed;
+
+  Integer bathrooms;
+
+  @BindParam("is-private-bathrooms")
+  Boolean isPrivateBathrooms;
+
 }
