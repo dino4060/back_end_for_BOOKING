@@ -1,5 +1,7 @@
 package ute.mobile.back_end_for_BOOKING.business.dto;
 
+import java.time.LocalDate;
+
 import org.springframework.web.bind.annotation.BindParam;
 
 import lombok.AccessLevel;
@@ -32,4 +34,9 @@ public class RoomParam extends PageParam {
   @BindParam("is-private-bathrooms")
   Boolean isPrivateBathrooms;
 
+  @BindParam("start-date")
+  LocalDate startDate;
+
+  @BindParam("end-date")
+  LocalDate endDate;
 }
