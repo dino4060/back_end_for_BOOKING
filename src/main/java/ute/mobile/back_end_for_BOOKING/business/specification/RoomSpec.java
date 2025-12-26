@@ -9,19 +9,48 @@ import ute.mobile.back_end_for_BOOKING.models.Room;
 public class RoomSpec extends PageSpec {
 
   public static Specification<Room> toQueryable(RoomParam param) {
-    return Specification.where(
-        likeFullText(param.getKeywords()));
+    return Specification
+        .where(hasDestination(param.getDestination()))
+        .and(inPriceRange(param.getMinPrice(), param.getMaxPrice()));
   }
 
-  public static Specification<Room> likeFullText(String text) {
-    return (root, query, builder) -> {
-      if (text == null || text.trim().isEmpty())
-        return null;
-      String pattern = "%" + text.toLowerCase() + "%";
+  public static Specification<Room> hasDestination(String destination) {
 
-      return builder.or(
-          builder.like(builder.lower(root.get("highlight")), pattern),
-          builder.like(builder.lower(root.get("detail")), pattern));
+    return (root, query, builder) -> {
+      if (destination == null || destination == "")
+        return null;
+
+      return builder.equal(
+          root.get("destination"),
+          destination);
+    };
+  }
+
+  public static Specification<Room> inPriceRange(Integer minPrice, Integer maxPrice) {
+    return (root, query, builder) -> {
+      if (minPrice != null && maxPrice != null) {
+        if (minPrice > maxPrice)
+          return null;
+
+        return builder.between(
+            root.get("price"),
+            minPrice,
+            maxPrice);
+      }
+
+      if (minPrice != null) {
+        return builder.greaterThanOrEqualTo(
+            root.get("price"),
+            minPrice);
+      }
+
+      if (maxPrice != null) {
+        return builder.lessThanOrEqualTo(
+            root.get("price"),
+            maxPrice);
+      }
+
+      return null;
     };
   }
 }
