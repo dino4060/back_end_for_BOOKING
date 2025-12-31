@@ -46,7 +46,7 @@ public class UserService {
     return this.userRepo.save(userToCreate);
   }
 
-  public UserData edit(UserBody body, CurrentUser currentUser) {
+  public UserData edit(CurrentUser currentUser, UserBody body) {
     User user = this.userRepo
         .findById(currentUser.id())
         .orElseThrow(() -> new NotFoundE("User not found"));
