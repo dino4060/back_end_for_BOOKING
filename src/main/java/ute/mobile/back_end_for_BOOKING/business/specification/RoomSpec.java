@@ -4,11 +4,8 @@ import java.time.LocalDate;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import jakarta.persistence.criteria.Root;
-import jakarta.persistence.criteria.Subquery;
 import ute.mobile.back_end_for_BOOKING.business.dto.RoomParam;
 import ute.mobile.back_end_for_BOOKING.common.application.PageSpec;
-import ute.mobile.back_end_for_BOOKING.models.BookedDate;
 import ute.mobile.back_end_for_BOOKING.models.Room;
 
 public class RoomSpec extends PageSpec {
@@ -34,25 +31,11 @@ public class RoomSpec extends PageSpec {
       LocalDate effectiveStart = startDate.isBefore(today) ? today : startDate;
 
       if (endDate.isBefore(effectiveStart))
-        return null; // builder.disjunction(); // 1=0 (not found)
+        return null;
 
       return builder.not(
           root.get("id").in(
               BookedDateSpec.subBookedRoomIds(query, builder, effectiveStart, endDate)));
-
-      // // Tìm các phòng ĐÃ BỊ ĐẶT
-      // Subquery<Long> subquery = query.subquery(Long.class);
-      // Root<BookedDate> bookedDateRoot = subquery.from(BookedDate.class);
-
-      // subquery
-      // .select(bookedDateRoot.get("room").get("id"))
-      // .where(builder.between(
-      // bookedDateRoot.get("date"),
-      // effectiveStart,
-      // endDate));
-
-      // // LOẠI TRỪ các phòng đã bị đặt
-      // return builder.not(root.get("id").in(subquery));
     };
   }
 
